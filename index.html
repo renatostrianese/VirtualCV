@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0c1124" />
+    <title>Renato Strianese · CV interactivo</title>
+    <meta name="description" content="Perfil profesional interactivo de Renato Strianese: Consultor Senior en IA y Software · Microsoft & HP. Explora el mapa para descubrirlo." />
+    <meta property="og:title" content="Renato Strianese · CV interactivo" />
+    <meta property="og:description" content="Explora un mundo 3D isométrico y descubre mi perfil profesional." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <canvas id="scene"></canvas>
+    <div id="labels"></div>
+
+    <div id="hud" hidden>
+      <div class="hud-card glass" id="progress">
+        <img src="/photo.jpg" alt="" class="avatar-sm" />
+        <div class="progress-info">
+          <strong>Renato Strianese</strong>
+          <div class="progress-row">
+            <span><span data-i18n="hud.discovered">Zonas</span> <b id="hud-zones">0/9</b></span>
+            <span><span data-i18n="hud.skills">Skills</span> <b id="hud-skills">0/13</b></span>
+          </div>
+          <div class="bar"><i id="hud-bar"></i></div>
+        </div>
+      </div>
+
+      <div class="hud-actions">
+        <button id="btn-map" class="icon-btn glass" data-i18n-title="hud.map" title="Mapa">🗺️</button>
+        <button class="icon-btn glass" data-act="lang" data-i18n-title="hud.lang" title="Idioma"><span data-lang-label>ES</span></button>
+        <button class="icon-btn glass" data-act="sound" data-i18n-title="hud.sound" title="Sonido"><span class="sound-ico">🔊</span></button>
+        <button class="icon-btn glass" data-act="fast" data-i18n-title="hud.fast" title="CV rápido">📄</button>
+        <button id="btn-help" class="icon-btn glass" data-i18n-title="hud.help" title="Ayuda">?</button>
+      </div>
+
+      <aside id="quest" class="glass" hidden>
+        <h3 data-i18n="hud.mapTitle">Zonas por descubrir</h3>
+        <ul id="quest-list"></ul>
+      </aside>
+
+      <canvas id="minimap" width="160" height="160"></canvas>
+      <div id="hint" class="glass" hidden></div>
+      <button id="prompt" class="glass" hidden></button>
+      <div id="toasts"></div>
+      <div id="joystick"><div id="knob"></div></div>
+    </div>
+
+    <aside id="panel" hidden>
+      <header>
+        <div class="panel-icon" id="panel-icon"></div>
+        <div class="panel-titles">
+          <h2 id="panel-title"></h2>
+          <p id="panel-sub"></p>
+        </div>
+        <button id="panel-close" class="icon-btn" data-i18n-title="hud.close" title="Cerrar">✕</button>
+      </header>
+      <div id="panel-body"></div>
+    </aside>
+
+    <div id="help" class="modal" hidden>
+      <div class="modal-card glass">
+        <h2 data-i18n="help.title">Cómo jugar</h2>
+        <dl>
+          <dt data-i18n="help.move"></dt><dd data-i18n="help.moveText"></dd>
+          <dt data-i18n="help.interact"></dt><dd data-i18n="help.interactText"></dd>
+          <dt data-i18n="help.collect"></dt><dd data-i18n="help.collectText"></dd>
+          <dt data-i18n="help.zoom"></dt><dd data-i18n="help.zoomText"></dd>
+        </dl>
+        <p class="muted" data-i18n="help.fast"></p>
+        <button id="help-close" class="btn primary" data-i18n="hud.close">Cerrar</button>
+      </div>
+    </div>
+
+    <section id="start">
+      <div class="start-card">
+        <div class="start-lang">
+          <button class="pill" data-act="lang"><span data-lang-label>ES</span> / <span data-lang-other>EN</span></button>
+        </div>
+        <div class="photo-ring"><img src="/photo.jpg" alt="Renato Strianese" /></div>
+        <p class="kicker" data-i18n="start.kicker">Currículum interactivo</p>
+        <h1>Renato Strianese</h1>
+        <p class="lead" id="start-headline"></p>
+        <div class="start-actions">
+          <button id="btn-explore" class="btn primary big"><span data-i18n="start.explore">Explorar el mapa</span></button>
+          <button class="btn big" data-act="fast" data-fast-start data-i18n="start.fast">Ver CV rápido</button>
+        </div>
+        <p class="muted small" data-i18n="start.hint"></p>
+      </div>
+    </section>
+
+    <section id="fast" hidden>
+      <div class="fast-bar glass">
+        <button class="btn" data-act="game" data-i18n="hud.game">Volver al mapa</button>
+        <div class="spacer"></div>
+        <button class="btn" data-act="print" data-i18n="hud.print">Imprimir / PDF</button>
+        <button class="btn" data-act="lang"><span data-lang-label>ES</span> / <span data-lang-other>EN</span></button>
+      </div>
+      <main id="fast-content"></main>
+    </section>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
